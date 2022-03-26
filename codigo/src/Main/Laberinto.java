@@ -1,26 +1,26 @@
 package Main;
 import java.util.Random;
 
-public class Problema {
+public class Laberinto {
 	
 	
 	// Construimos Estado Inicial, Final y Malla de obst√°culos en esta clase.
 	
-	private Casilla [] [] 	campoBatalla;
+	private Nodo [] [] 	campoBatalla;
 	private int[] inicioRobot;
 	private int[] finalRobot;
 	private int[][] obstaculos;
 	private Configuracion cfg;
 	
-	public Problema (Configuracion cfg){
+	public Laberinto (Configuracion cfg){
 		
-		campoBatalla= new Casilla[cfg.getNumFila()][cfg.getNumColumna()];
+		campoBatalla= new Nodo[cfg.getNumFila()][cfg.getNumColumna()];
 		this.cfg=cfg;
 
 		
 		for(int i=0;i<cfg.getNumFila();i++) {
 			for(int j=0;j<cfg.getNumColumna();j++) {
-				Casilla cas = new Casilla(i,j);
+				Nodo cas = new Nodo(i,j);
 				campoBatalla[i][j]= cas;
 			}
 		}
@@ -46,11 +46,11 @@ public class Problema {
 			pos1=ram.nextInt(cfg.getNumFila());
 			pos2=ram.nextInt(cfg.getNumColumna());
 			
-			//Compruebo que en esa posiciÛn no se encuentre otro obstaculo
+			//Compruebo que en esa posiciÔøΩn no se encuentre otro obstaculo
 					
-				if(!campoBatalla[pos1][pos2]._esObstaculo) {
+				if(!campoBatalla[pos1][pos2].esObstaculo) {
 							
-					campoBatalla[pos1][pos2].set_esObstaculo(true);
+					campoBatalla[pos1][pos2].setesObstaculo(true);
 					obstaculos[control][0]=pos1;
 					obstaculos[control][1]=pos2;
 					control++;
@@ -72,7 +72,7 @@ public class Problema {
 			
 			//Es obstaculo
 			
-			if(!campoBatalla[pos1][pos2]._esObstaculo) {
+			if(!campoBatalla[pos1][pos2].esObstaculo) {
 				inicioRobot[0]=pos1;
 				inicioRobot[1]=pos2;
 				control++;
@@ -94,7 +94,7 @@ public class Problema {
 			
 			//Es obstaculo
 			
-			if(!campoBatalla[pos1][pos2]._esObstaculo) {
+			if(!campoBatalla[pos1][pos2].esObstaculo) {
 				finalRobot[0]=pos1;
 				finalRobot[1]=pos2;
 				control++;
@@ -107,7 +107,7 @@ public class Problema {
 
 
 
-	public Casilla[][] getCampoBatalla() {
+	public Nodo[][] getCampoBatalla() {
 		return campoBatalla;
 	}
 
@@ -129,14 +129,14 @@ public class Problema {
 		return obstaculos;
 	}
 
-public Casilla getInicio() {
+public Nodo getInicio() {
 		
-		return new Casilla(inicioRobot[0],inicioRobot[1]);
+		return new Nodo(inicioRobot[0],inicioRobot[1]);
 	}
 	
-	public Casilla getFinal() {
+	public Nodo getFinal() {
 		
-		return new Casilla(finalRobot[0],finalRobot[1]);
+		return new Nodo(finalRobot[0],finalRobot[1]);
 	}
 
 
