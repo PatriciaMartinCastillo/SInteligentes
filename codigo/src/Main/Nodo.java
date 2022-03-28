@@ -4,12 +4,12 @@ public class Nodo {
 	
 		private int cordX, cordY, costeG;
 		private Nodo padre;
-		boolean esObstaculo = false;
 		
-		public Nodo (int filaP, int columnaP){
-			cordX = filaP;
-			cordY = columnaP;
-			padre = null;
+		
+		public Nodo (int cordX, int cordY, Nodo padre){
+			this.cordX = cordX;
+			this.cordY = cordY;
+			this.padre = padre;
 			
 		}
 		
@@ -43,14 +43,6 @@ public class Nodo {
 
 		public void setcordY(int cordY) {
 			this.cordY = cordY;
-		}
-
-		public boolean isesObstaculo() {
-			return esObstaculo;
-		}
-
-		public void setesObstaculo(boolean esObstaculo) {
-			this.esObstaculo = esObstaculo;
 		}
 
 		public Nodo getpadre() {

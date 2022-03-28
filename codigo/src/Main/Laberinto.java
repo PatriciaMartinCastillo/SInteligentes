@@ -4,30 +4,38 @@ import java.util.Random;
 public class Laberinto {
 	
 	
-	// Construimos Estado Inicial, Final y Malla de obstáculos en esta clase.
+	// Construimos Estado Inicial, objetivo y Malla de obstáculos en esta clase.
 	
-	private Nodo [] [] 	campoBatalla;
-	private int[] inicioRobot;
-	private int[] finalRobot;
-	private int[][] obstaculos;
+	private char [] [] 	matriz;
+	private int dimensionX;
+	private int dimensionY;
+	private int iniX, iniY, objX, objY;
+	private int prb;
+	
 	private Configuracion cfg;
-	
-	public Laberinto (Configuracion cfg){
+	Boolean solucionable;
+
+	// HECHO EL CONSTRUCTOR
+	public Laberinto (int dimensionX, int dimensionY, int prob){
 		
-		campoBatalla= new Nodo[cfg.getNumFila()][cfg.getNumColumna()];
-		this.cfg=cfg;
+		
+
+		matriz= new char[dimensionX][dimensionY];
+		prb = prob;
+		
 
 		
-		for(int i=0;i<cfg.getNumFila();i++) {
-			for(int j=0;j<cfg.getNumColumna();j++) {
-				Nodo cas = new Nodo(i,j);
-				campoBatalla[i][j]= cas;
+		for(int i=0;i<dimensionX;i++) {
+			for(int j=0;j<dimensionY;j++) {
+				matriz[i][j]= ' ';
 			}
 		}
 		
 		
-		Random ram = new Random();
-		ram.setSeed(cfg._semilla);		
+	// GENERAR LABERINTO
+		Random ram = new Random();		
+
+		// ram.setSeed(cfg._semilla);		
 	
 		int control=0;
 		
@@ -36,23 +44,20 @@ public class Laberinto {
 		
 		//Obstaculos
 		
-		control=0;
-		obstaculos = new int[cfg.getNumObstaculos()][2];
+		int tope=(prob/100)*(dimensionX*dimensionY);
 				
-		while(control<cfg.getNumObstaculos()) {
+		while(control<tope) {
 					
 			//Creo posiciones aleatorias
 				
-			pos1=ram.nextInt(cfg.getNumFila());
-			pos2=ram.nextInt(cfg.getNumColumna());
+			pos1=ram.nextInt(dimensionX);
+			pos2=ram.nextInt(dimensionY);
 			
-			//Compruebo que en esa posici�n no se encuentre otro obstaculo
+			//Compruebo que en esa posicion no se encuentre otro obstaculo
 					
-				if(!campoBatalla[pos1][pos2].esObstaculo) {
+				if(matriz[pos1][pos2] != '*') {
 							
-					campoBatalla[pos1][pos2].setesObstaculo(true);
-					obstaculos[control][0]=pos1;
-					obstaculos[control][1]=pos2;
+					matriz[pos1][pos2] = '*';
 					control++;
 				}
 			
@@ -61,42 +66,39 @@ public class Laberinto {
 				
 			//Inicial	
 				
-		inicioRobot= new int[2];
+		
 		control=0;
 				
 		while(control<1) {
 			
 			//Posicion aleatoria
-			pos1=ram.nextInt(cfg.getNumFila());
-			pos2=ram.nextInt(cfg.getNumColumna());
+			iniX=ram.nextInt(dimensionX);
+			iniY=ram.nextInt(dimensionY);
 			
 			//Es obstaculo
 			
-			if(!campoBatalla[pos1][pos2].esObstaculo) {
-				inicioRobot[0]=pos1;
-				inicioRobot[1]=pos2;
+			if(matriz[iniX][iniY] != '*') {
+				matriz[iniX][iniY] = 'I';
 				control++;
 			}
 			
 		}
 		
 		
-		//Final
+		//objetivo
 		
 		control=0;
-		finalRobot= new int[2];
 		
 		while(control<1) {
 			
 			//Posicion aleatoria
-			pos1=ram.nextInt(cfg.getNumFila());
-			pos2=ram.nextInt(cfg.getNumColumna());
+			objX=ram.nextInt(dimensionX);
+			objY=ram.nextInt(dimensionY);
 			
 			//Es obstaculo
 			
-			if(!campoBatalla[pos1][pos2].esObstaculo) {
-				finalRobot[0]=pos1;
-				finalRobot[1]=pos2;
+			if(matriz[objX][objY] != '*' && matriz[objX][objY] != 'I') {
+				matriz[objX][objY] = 'G';
 				control++;
 			}
 			
@@ -105,22 +107,22 @@ public class Laberinto {
 	
 	}
 
+    
 
-
-	public Nodo[][] getCampoBatalla() {
-		return campoBatalla;
+	public Nodo[][] getmatriz() {
+		return matriz;
 	}
 
 
 
-	public int[] getInicioRobot() {
-		return inicioRobot;
+	public int[] getinicio() {
+		return inicio;
 	}
 
 
 
-	public int[] getFinalRobot() {
-		return finalRobot;
+	public int[] getobjetivo() {
+		return objetivo;
 	}
 
 
@@ -131,12 +133,12 @@ public class Laberinto {
 
 public Nodo getInicio() {
 		
-		return new Nodo(inicioRobot[0],inicioRobot[1]);
+		return new Nodo(inicio[0],inicio[1]);
 	}
 	
-	public Nodo getFinal() {
+	public Nodo getobjetivo() {
 		
-		return new Nodo(finalRobot[0],finalRobot[1]);
+		return new Nodo(objetivo[0],objetivo[1]);
 	}
 
 

@@ -5,12 +5,7 @@ public class Configuracion {
 	
 	int numPixelFila, numPixelCol, _tamCelda, nfila, nColumna	;
 	
-	// Establecer parámetros de la batalla
-			int numberOfRounds		= 5;
-			long inactivityTime 	= 10000000;
-			double gunCoolingRate	= 1.0;
-			int sentryBorderSize 	= 50;
-			boolean hideEnemyNames 	= false;
+	
 			
 			
 	public Configuracion( ){
