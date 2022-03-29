@@ -41,9 +41,9 @@ public class Laberinto {
 			int control=0;
 
 			//Inicio
-			setIniX(ram.nextInt(dimensionX));
-			iniY=ram.nextInt(dimensionY);
-			matriz[getIniX()][iniY] = 'I';
+			this.iniX = ram.nextInt(dimensionX);
+			this.iniY = ram.nextInt(dimensionY);
+			matriz[iniX][iniY] = 'I';
 
 			//Objetivo
 			while(control<1){
@@ -74,7 +74,7 @@ public class Laberinto {
 				System.out.print(matriz[i][j]);
 			}
 			System.out.print("|");
-			System.out.println("\n");
+			System.out.print("\n");
 		}
 	}
 
@@ -84,6 +84,10 @@ public class Laberinto {
 
 	public int getIniX() {
 		return iniX;
+	}
+	
+	public int getIniY() {
+		return iniY;
 	}
 
 	public void setIniX(int iniX) {

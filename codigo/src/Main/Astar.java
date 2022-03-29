@@ -12,12 +12,12 @@ public class Astar {
 
     public Astar(Laberinto lab){
         this.lab = lab;
-        Nodo padre = new Nodo(lab.getIniX(), lab.getIniX(),null);
+        Nodo padre = new Nodo(lab.getIniX(), lab.getIniY(),null);
         Tree<Nodo> arbol = new Tree<Nodo>(padre);
-        
         abiertos = new ArrayList<Nodo>();
         System.out.println(abiertos.toString());
         abiertos.add(padre);
+        System.out.println(padre.cordX + "|" + padre.cordY);
         System.out.println(abiertos.toString());
         calcularSucesores(padre);
         System.out.println(abiertos.toString());
@@ -25,6 +25,7 @@ public class Astar {
         Iterator<Nodo> i = abiertos.iterator();
         while (i.hasNext()) {
         	Nodo temp = i.next();
+        	System.out.println(temp.cordX + "|" + temp.cordY);
         	System.out.println(String.valueOf(lab.getValor(temp.cordX, temp.cordY)));
         }
         
@@ -61,20 +62,20 @@ public class Astar {
 		int j = nodo.getcordY();
 		
 		
-		if(esValido(i+1,j,this.lab) == true) { //arriba
+		if(esValido(i+1,j,this.lab) && lab.getValor(i+1,j) != '*') { //arriba
 			abiertos.add(new Nodo(i+1,j,nodo));
 		}
 		
-		if(esValido(i,j-1,this.lab) == true) { // izquierda
+		if(esValido(i,j-1,this.lab) && lab.getValor(i,j-1) != '*') { // izquierda
 			abiertos.add(new Nodo(i,j-1,nodo));
 		}
 		
-		if(esValido(i-1,j,this.lab) == true) { //abajo
+		if(esValido(i-1,j,this.lab) && lab.getValor(i-1,j) != '*') { //abajo
 			abiertos.add(new Nodo(i-1,j,nodo));
 		}
 		
 		
-		if(esValido(i,j+1,this.lab) == true) { // derecha
+		if(esValido(i,j+1,this.lab) && lab.getValor(i,j+1) != '*') { // derecha
 			abiertos.add(new Nodo(i,j+1,nodo));
 		}
 		
@@ -83,11 +84,19 @@ public class Astar {
     public boolean esValido(int cordX, int cordY, Laberinto lab)
     {
         boolean res = true;
-        if((cordX >= lab.dimensionX || cordY >= lab.dimensionY) || (cordX < 0 && cordY < 0) || (lab.getValor(cordX,cordY)=='*'))
-        {
+        if(cordX >= lab.dimensionX || cordY >= lab.dimensionY || (cordX < 0 || cordY < 0)){
             res= false;
         }
         return res;
+    }
+    
+    public boolean noEsObstaculo(int cordX, int cordY, Laberinto lab) {
+    	boolean res = true;
+    	if(lab.getValor(cordX,cordY) == '*') {
+    		res = false;
+    	}
+    	return res;
+    	
     }
 
     public int getManhattan(Nodo n){
