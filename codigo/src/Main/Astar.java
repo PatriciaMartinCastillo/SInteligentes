@@ -1,5 +1,7 @@
 package Main;
-import java.lang.Math;
+import java.lang.Math.*;
+import java.util.ArrayList;
+import java.util.*;
 
 public class Astar {
 
@@ -10,14 +12,14 @@ public class Astar {
 
     public Astar(Laberinto lab){
         this.lab = lab;
-        Nodo padre = new Nodo(lab.iniX, lab.iniY,null);
-        arbol = new Node<Nodo>;
-        Node<Nodo> s = padre;
+        Nodo padre = new Nodo(lab.getIniX(), lab.getIniX(),null);
+        Tree<Nodo> arbol = new Tree<Nodo>(padre);
+        
         
 
         abiertos = new ArrayList<Nodo>();
 
-        abiertos = calcularSucesores(padre);
+        calcularSucesores(padre, abiertos);
 
         cerrados = new ArrayList<Nodo>();
 
@@ -76,11 +78,10 @@ public class Astar {
 
     public int getManhattan(Nodo n){
         int res;
-        res = (abs(n.cordX - this.lab.objX)) + (abs(n.cordY - this.lab.objY));
+        res = (Math.abs(n.cordX - this.lab.objX)) + (Math.abs(n.cordY - this.lab.objY));
         return res;
     }
 
 
 
-    }
 }

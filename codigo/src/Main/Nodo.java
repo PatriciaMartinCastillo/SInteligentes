@@ -2,7 +2,9 @@ package Main;
 
 public class Nodo {
 	
-		private int cordX, cordY, costeG;
+		int cordX;
+		int cordY;
+		private int costeG;
 		private Nodo padre;
 		
 		
