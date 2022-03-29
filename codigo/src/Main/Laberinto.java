@@ -73,4 +73,10 @@ public class Laberinto {
 			}
 		}
 	}
+
+	public int getValor(int cordX, int cordY){
+		return matriz[cordX][cordY];
+	}
+
+	
 }
