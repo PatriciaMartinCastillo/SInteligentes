@@ -1,9 +1,10 @@
 package Main;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Tree<T> {
+public class Tree<T> implements Iterable {
     private Node<T> root;
 
     public Tree(T rootData) {
@@ -17,4 +18,10 @@ public class Tree<T> {
         private Node<T> parent;
         private List<Node<T>> children;
     }
+
+	@Override
+	public Iterator iterator() {
+		
+		return null;
+	}
 }

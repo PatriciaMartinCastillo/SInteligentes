@@ -4,9 +4,12 @@ public class LaberintoApp {
 
 	public static void main(String[] args) {
 		
-		    Laberinto lab = new Laberinto(60,80,30);
+		    Laberinto lab = new Laberinto(16,16,20);
 		    lab.generarLaberinto();
-		    lab.mostrarLaberinto();    
+		    lab.mostrarLaberinto();   
+		    Astar a = new Astar(lab);
+		    
+		    
 		}
 
 }

@@ -69,10 +69,11 @@ public class Laberinto {
 
 	public void mostrarLaberinto(){
 		for(int i=0;i<dimensionX;i++) {
-			System.out.println("");
+			System.out.print("|");
 			for(int j=0;j<dimensionY;j++) {
 				System.out.print(matriz[i][j]);
 			}
+			System.out.print("|");
 			System.out.println("\n");
 		}
 	}

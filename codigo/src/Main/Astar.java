@@ -15,19 +15,33 @@ public class Astar {
         Nodo padre = new Nodo(lab.getIniX(), lab.getIniX(),null);
         Tree<Nodo> arbol = new Tree<Nodo>(padre);
         
+        abiertos = new ArrayList<Nodo>();
+        System.out.println(abiertos.toString());
+        abiertos.add(padre);
+        System.out.println(abiertos.toString());
+        calcularSucesores(padre);
+        System.out.println(abiertos.toString());
+        
+        Iterator<Nodo> i = abiertos.iterator();
+        while (i.hasNext()) {
+        	Nodo temp = i.next();
+        	System.out.println(String.valueOf(lab.getValor(temp.cordX, temp.cordY)));
+        }
         
 
-        abiertos = new ArrayList<Nodo>();
-
-        calcularSucesores(padre, abiertos);
-
         cerrados = new ArrayList<Nodo>();
-
-
-
+        
+        
+        
+        
+        
+        
+        
         if (abiertos == null){
             throw new RuntimeException("FRACASO");
         }
+        
+        
 
 
 
@@ -41,26 +55,26 @@ public class Astar {
         return n.cordX == lab.objX && n.cordY == lab.objY;
     }
     
-    public void calcularSucesores(Nodo nodo, ArrayList<Nodo> abiertos){
+    public void calcularSucesores(Nodo nodo){
 		
 		int i = nodo.getcordX();
 		int j = nodo.getcordY();
 		
 		
-		if(esValido(i+1,j,this.lab)) { //arriba
+		if(esValido(i+1,j,this.lab) == true) { //arriba
 			abiertos.add(new Nodo(i+1,j,nodo));
 		}
 		
-		if(esValido(i,j-1,this.lab)) { // izquierda
+		if(esValido(i,j-1,this.lab) == true) { // izquierda
 			abiertos.add(new Nodo(i,j-1,nodo));
 		}
 		
-		if(esValido(i-1,j,this.lab)) { //abajo
+		if(esValido(i-1,j,this.lab) == true) { //abajo
 			abiertos.add(new Nodo(i-1,j,nodo));
 		}
 		
 		
-		if(esValido(i,j+1,this.lab)) { // derecha
+		if(esValido(i,j+1,this.lab) == true) { // derecha
 			abiertos.add(new Nodo(i,j+1,nodo));
 		}
 		
@@ -68,10 +82,10 @@ public class Astar {
 
     public boolean esValido(int cordX, int cordY, Laberinto lab)
     {
-        boolean res = false;
-        if((lab.getValor(cordX,cordY)!='*') && (cordX < lab.dimensionX && cordY < lab.dimensionY) && (cordX >= 0 && cordY >= 0))
+        boolean res = true;
+        if((cordX >= lab.dimensionX || cordY >= lab.dimensionY) || (cordX < 0 && cordY < 0) || (lab.getValor(cordX,cordY)=='*'))
         {
-            res= true;
+            res= false;
         }
         return res;
     }
