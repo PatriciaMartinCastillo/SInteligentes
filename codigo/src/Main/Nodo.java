@@ -12,6 +12,7 @@ public class Nodo {
 			this.cordX = cordX;
 			this.cordY = cordY;
 			this.padre = padre;
+			this.costeG = 0;
 			
 		}
 		

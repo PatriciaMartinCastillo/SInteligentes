@@ -107,8 +107,10 @@ public class Laberinto {
 		Nodo temp = i.next();
 		while (i.hasNext())
 		{
+			if(matriz[temp.getcordX()][temp.getcordY()]!='G' || (matriz[temp.getcordX()][temp.getcordY()]!='I')){
 			matriz[temp.getcordX()][temp.getcordY()]='+';
 			temp = i.next();
+			}
 		}
 
 	}

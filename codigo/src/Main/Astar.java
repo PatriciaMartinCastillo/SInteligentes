@@ -17,40 +17,54 @@ public class Astar {
     public Astar(Laberinto lab){
         this.lab = lab;
         Nodo padre = new Nodo(lab.getIniX(), lab.getIniY(),null);
-        padre.setcosteG(0);
         
+        
+        // inicializa las listas
+
         abiertos = new ArrayList<Nodo>();
         cerrados = new ArrayList<Nodo>();
         solucion = new ArrayList<Nodo>();
 
-        System.out.println(abiertos.toString());
+        // el primer nodo abierto es el inicio
 
         abiertos.add(padre);
-        System.out.println(abiertos.toString());
+        
+        // se expande el nodo inicial y se inicia la busqueda
 
         calcularSucesores(padre);
-        System.out.println(abiertos.toString());
-
-        if (abiertos == null){
+        
+        // si no hay nodos abiertos, no se puede iniciar
+        if (abiertos.isEmpty()){
             throw new RuntimeException("FRACASO");
         }
 
-        padre = abiertos.get(0);
-        while ((padre.getcordX() == lab.objX && padre.getcordY() == lab.objY)!= true) {
-            padre = calcularSucesores(padre); // calcula sucesores del padre, lo elimina de abiertos y lo añade a cerrados
-            System.out.print(padre.getcordX());
-            System.out.println(padre.getcordY()); // da el valor almacenado en el nodo padre
+        
+        
+            padre = abiertos.get(0);
+        
+        
+            // mientras que padre no sea el objetivo, iteramos
+            while ((padre.getcordX() == lab.objX && padre.getcordY() == lab.objY)!= true) {
+                padre = calcularSucesores(padre); // calcula sucesores del padre, lo elimina de abiertos y lo añade a cerrados
+            }
+
+            // cerramos el ultimo nodo
+
+            cerrados.add(padre);
+            System.out.println("**************************************DONE**********************************************");
+
+            // generamos la solucion rescatando los padres de los nodos a partir del objetivo
+
+            while(padre.getcordX()!=lab.getIniX() || padre.getcordY()!=lab.getIniY())
+            {
+                padre=padre.getpadre();
+                solucion.add(padre);
+                
+            } 
         }
-
-        cerrados.add(padre);
-        System.out.println("Donete :)");
-
-        while(padre.getcordX()!=lab.getIniX() && padre.getcordY()!=lab.getIniY())
-        {
-            solucion.add(padre);
-            padre=padre.getpadre();
-        } 
-    }
+        
+        
+  
 
     public boolean objetivo(Nodo n){
         return n.getcordX() == lab.objX && n.getcordY() == lab.objY;
@@ -61,46 +75,57 @@ public class Astar {
 		int i = nodo.getcordX();
 		int j = nodo.getcordY();
 
-		
+	// EXPANDIMOS ARRIBA CHECKEANDO LIMITES
 	if(i<lab.dimensionX-1){
         Nodo hijo = new Nodo(i+1,j,nodo);
 	    if(esValido(i+1,j,this.lab) && estacerrado(cerrados, hijo) && estacogido(abiertos, hijo)) { //arriba
-            System.out.print("Nodo abierto creado en: ");
-            System.out.print(hijo.getcordX());
-            System.out.println(hijo.getcordY());
+            hijo.setcosteG(nodo.getcosteG()+1);
 	        abiertos.add(hijo);
+
 	    }
     }
+    //EXPANDIMOS ABAJO CHECKEANDO LIMITES
     if(i>0){		
         Nodo hijo = new Nodo(i-1,j,nodo);
 		if(esValido(i-1,j,this.lab) && estacerrado(cerrados, hijo) && estacogido(abiertos, hijo)) { //abajo
-            System.out.print("Nodo abierto creado en: ");
-            System.out.print(hijo.getcordX());
-            System.out.println(hijo.getcordY());
+            hijo.setcosteG(nodo.getcosteG()+1);
 			abiertos.add(hijo);
 		}
     }	
+    //EXPANDIMOS IZQUIERDA CHECKEANDO LIMITES
 	if(j>0){	
         Nodo hijo = new Nodo(i,j-1,nodo);	
 		if(esValido(i,j-1,this.lab) && estacerrado(cerrados, hijo) && estacogido(abiertos, hijo)) { // izquierda
-            System.out.print("Nodo abierto creado en: ");
-            System.out.print(hijo.getcordX());
-            System.out.println(hijo.getcordY());
+            hijo.setcosteG(nodo.getcosteG()+1);
 			abiertos.add(hijo);
 		}
     }
+    //EXPANDIMOS DERECHA CHECKEANDO LIMITES
     if(j<lab.dimensionY-1){	
         Nodo hijo = new Nodo(i,j+1,nodo);	
 		if(esValido(i,j+1,this.lab) && estacerrado(cerrados, hijo) && estacogido(abiertos, hijo)) { // derecha
-            System.out.print("Nodo abierto creado en: ");
-            System.out.print(hijo.getcordX());
-            System.out.println(hijo.getcordY());
+            hijo.setcosteG(nodo.getcosteG()+1);
 			abiertos.add(hijo);
 		}
     }
+    // CERRAMOS EL NODO PADRE Y ELIMINAMOS DE ABIERTOS
     cerrados.add(nodo);
     abiertos.remove(nodo);
-    Nodo hijo = elegirhijo(abiertos);
+
+
+    Nodo hijo = null;
+
+    //COMPROBAMOS QUE TENGA HIJOS POSIBLES, SINO NO TIENE SOLUCION
+
+    try{
+
+        hijo = elegirhijo(abiertos);
+
+    }
+    catch (NoSuchElementException e){
+        System.out.println(" ( ͡° ͜ʖ ͡°) NO HAY SOLUCION ( ͡° ͜ʖ ͡°)");
+    }
+    ;
 	return hijo;
 
 	}
