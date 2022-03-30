@@ -2,8 +2,8 @@ package Main;
 
 public class Nodo {
 	
-		int cordX;
-		int cordY;
+		private int cordX;
+		private int cordY;
 		private int costeG;
 		private Nodo padre;
 		
@@ -32,18 +32,13 @@ public class Nodo {
 		}
 
 		public int getcordX() {
-			return cordX;
+			return this.cordX;
 		}
 
 		public int getcordY() {
-			return cordY;
+			return this.cordY;
 		}
-
-		public void setcordX(int cordX) {
-			this.cordX = cordX;
-		}
-
-		public void setcordY(int cordY) {
+ 		void setcordY(int cordY) {
 			this.cordY = cordY;
 		}
 
