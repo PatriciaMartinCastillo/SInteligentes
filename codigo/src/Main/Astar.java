@@ -8,8 +8,9 @@ import java.util.*;
 
 public class Astar {
 
-    private Laberinto lab;
-    private ArrayList<Nodo> abiertos, cerrados, solucion;
+    Laberinto lab;
+    ArrayList<Nodo> abiertos, cerrados;
+    ArrayList<Nodo> solucion;
     
 
 
@@ -20,6 +21,7 @@ public class Astar {
         
         abiertos = new ArrayList<Nodo>();
         cerrados = new ArrayList<Nodo>();
+        solucion = new ArrayList<Nodo>();
 
         System.out.println(abiertos.toString());
 
@@ -29,7 +31,9 @@ public class Astar {
         calcularSucesores(padre);
         System.out.println(abiertos.toString());
 
-        
+        if (abiertos == null){
+            throw new RuntimeException("FRACASO");
+        }
 
         padre = abiertos.get(0);
         while ((padre.getcordX() == lab.objX && padre.getcordY() == lab.objY)!= true) {
@@ -37,12 +41,15 @@ public class Astar {
             System.out.print(padre.getcordX());
             System.out.println(padre.getcordY()); // da el valor almacenado en el nodo padre
         }
+
+        cerrados.add(padre);
         System.out.println("Donete :)");
-  
-        if (abiertos == null){
-            throw new RuntimeException("FRACASO");
-        }
-        
+
+        while(padre.getcordX()!=lab.getIniX() && padre.getcordY()!=lab.getIniY())
+        {
+            solucion.add(padre);
+            padre=padre.getpadre();
+        } 
     }
 
     public boolean objetivo(Nodo n){
@@ -93,10 +100,6 @@ public class Astar {
     }
     cerrados.add(nodo);
     abiertos.remove(nodo);
-    if(abiertos==null)
-    {
-        throw new RuntimeException("FRACASO ABSOLUTO");
-    }
     Nodo hijo = elegirhijo(abiertos);
 	return hijo;
 
@@ -173,11 +176,7 @@ public class Astar {
         {
             menor = temp.getcosteG()+getH(temp);
             res=temp;
-        } 
-        System.out.print("El mejor hijo es: ");
-        System.out.print(res.getcordX());
-        System.out.println(res.getcordY());
-        
+        }         
         return res;
 
     }

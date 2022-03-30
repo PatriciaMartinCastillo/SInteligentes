@@ -1,12 +1,14 @@
 package Main;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Iterator;
 
 public class Laberinto {
 	
 	
 	// Construimos Estado Inicial, objetivo y Malla de obstáculos en esta clase.
 	
-	private char [] [] 	matriz;
+	public char [] [] 	matriz;
 	int dimensionX;
 	int dimensionY;
 	private int iniX, iniY;
@@ -99,6 +101,16 @@ public class Laberinto {
     public int getObjX(){
         return objX; 
 	}
+	public void pintarsolucion(ArrayList<Nodo> solucion)
+	{	
+		Iterator<Nodo> i = solucion.iterator();
+		Nodo temp = i.next();
+		while (i.hasNext())
+		{
+			matriz[temp.getcordX()][temp.getcordY()]='+';
+			temp = i.next();
+		}
 
+	}
 	
 }
