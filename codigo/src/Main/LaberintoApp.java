@@ -4,7 +4,7 @@ public class LaberintoApp {
 
 	public static void main(String[] args) {
 		
-		    Laberinto lab = new Laberinto(20,20,30);
+		    Laberinto lab = new Laberinto(20,20,10);
 		    lab.generarLaberinto();
 		    lab.mostrarLaberinto();   
 		    Astar a = new Astar(lab);

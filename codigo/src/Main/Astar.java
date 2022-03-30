@@ -1,19 +1,19 @@
 package Main;
+import java.lang.Math.*;
+import java.util.ArrayList;
+import java.util.*;
 
 public class Astar {
 
+    private Laberinto lab;
+    private ArrayList<Nodo> abiertos, cerrados, solucion;
+    
 
-    public Astar(){
 
-<<<<<<< Updated upstream
-        
-    }
-=======
     public Astar(Laberinto lab){
         this.lab = lab;
         Nodo padre = new Nodo(lab.getIniX(), lab.getIniY(),null);
         padre.setcosteG(0);
-        Tree<Nodo> arbol = new Tree<Nodo>(padre);
         
         abiertos = new ArrayList<Nodo>();
         cerrados = new ArrayList<Nodo>();
@@ -125,6 +125,7 @@ public class Astar {
         } 
         return res;
     }
+;
+    }
 
->>>>>>> Stashed changes
-}
+

@@ -2,13 +2,9 @@ package Main;
 
 public class Nodo {
 	
-<<<<<<< Updated upstream
-		private int cordX, cordY, costeG;
-=======
-		private int cordX;
-		private int cordY;
+		int cordX;
+		int cordY;
 		private int costeG;
->>>>>>> Stashed changes
 		private Nodo padre;
 		
 		
@@ -36,11 +32,11 @@ public class Nodo {
 		}
 
 		public int getcordX() {
-			return this.cordX;
+			return cordX;
 		}
 
 		public int getcordY() {
-			return this.cordY;
+			return cordY;
 		}
 
 		public void setcordX(int cordX) {

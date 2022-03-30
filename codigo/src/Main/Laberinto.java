@@ -7,9 +7,11 @@ public class Laberinto {
 	// Construimos Estado Inicial, objetivo y Malla de obstáculos en esta clase.
 	
 	private char [] [] 	matriz;
-	private int dimensionX;
-	private int dimensionY;
-	private int iniX, iniY, objX, objY;
+	int dimensionX;
+	int dimensionY;
+	private int iniX, iniY;
+	int objX;
+	int objY;
 	private int prb;
 	Boolean solucionable;
 
@@ -38,15 +40,9 @@ public class Laberinto {
 			int control=0;
 
 			//Inicio
-<<<<<<< Updated upstream
-			iniX=ram.nextInt(dimensionX);
-			iniY=ram.nextInt(dimensionY);
-			matriz[iniX][iniY] = 'I';
-=======
 			setIniX(ram.nextInt(dimensionX));
 			setIniY(ram.nextInt(dimensionY));
 			matriz[getIniX()][getIniY()] = 'I';
->>>>>>> Stashed changes
 
 			//Objetivo
 			while(control<1){
@@ -70,16 +66,12 @@ public class Laberinto {
 		
 		}
 
-	public void mostrarlaberinto(){
+	public void mostrarLaberinto(){
 		for(int i=0;i<dimensionX;i++) {
-			System.out.println("");
+			System.out.print("|");
 			for(int j=0;j<dimensionY;j++) {
-				System.out.print(matriz[dimensionX][dimensionY]);
+				System.out.print(matriz[i][j]);
 			}
-<<<<<<< Updated upstream
-		}
-	}
-=======
 			System.out.print("|");
 			System.out.println("");
 		}
@@ -109,5 +101,4 @@ public class Laberinto {
 	}
 
 	
->>>>>>> Stashed changes
 }
