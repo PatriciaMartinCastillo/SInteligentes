@@ -11,7 +11,6 @@ public class Laberinto {
 	private int dimensionY;
 	private int iniX, iniY, objX, objY;
 	private int prb;
-	private Configuracion cfg;
 	Boolean solucionable;
 
 	// HECHO EL CONSTRUCTOR
@@ -39,9 +38,15 @@ public class Laberinto {
 			int control=0;
 
 			//Inicio
+<<<<<<< Updated upstream
 			iniX=ram.nextInt(dimensionX);
 			iniY=ram.nextInt(dimensionY);
 			matriz[iniX][iniY] = 'I';
+=======
+			setIniX(ram.nextInt(dimensionX));
+			setIniY(ram.nextInt(dimensionY));
+			matriz[getIniX()][getIniY()] = 'I';
+>>>>>>> Stashed changes
 
 			//Objetivo
 			while(control<1){
@@ -71,6 +76,38 @@ public class Laberinto {
 			for(int j=0;j<dimensionY;j++) {
 				System.out.print(matriz[dimensionX][dimensionY]);
 			}
+<<<<<<< Updated upstream
 		}
 	}
+=======
+			System.out.print("|");
+			System.out.println("");
+		}
+	}
+
+	public int getValor(int cordX, int cordY){
+		return matriz[cordX][cordY];
+	}
+
+	public int getIniX() {
+		return iniX;
+	}
+	public int getIniY() {
+		return iniY;
+	}
+	public void setIniX(int iniX) {
+		this.iniX = iniX;
+	}
+	public void setIniY(int iniY) {
+		this.iniY = iniY;
+	}
+	public int getObjY(){
+        return objY; 
+    }
+    public int getObjX(){
+        return objX; 
+	}
+
+	
+>>>>>>> Stashed changes
 }
