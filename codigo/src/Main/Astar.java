@@ -11,6 +11,7 @@ public class Astar {
     Laberinto lab;
     ArrayList<Nodo> abiertos, cerrados;
     ArrayList<Nodo> solucion;
+    int costeSol;
     
 
 
@@ -54,9 +55,10 @@ public class Astar {
             System.out.println("**************************************DONE**********************************************");
 
             // generamos la solucion rescatando los padres de los nodos a partir del objetivo
-
+            costeSol=0;
             while(padre.getcordX()!=lab.getIniX() || padre.getcordY()!=lab.getIniY())
             {
+                costeSol++;
                 padre=padre.getpadre();
                 solucion.add(padre);
                 
@@ -123,7 +125,8 @@ public class Astar {
 
     }
     catch (NoSuchElementException e){
-        System.out.println(" ( ͡° ͜ʖ ͡°) NO HAY SOLUCION ( ͡° ͜ʖ ͡°)");
+	    lab.solucionable=false;
+        System.out.println("NO HAY SOLUCION");
     }
     ;
 	return hijo;

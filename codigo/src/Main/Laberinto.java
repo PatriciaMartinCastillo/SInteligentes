@@ -37,7 +37,7 @@ public class Laberinto {
 			}
 			Random ram = new Random();		
 
-			// ram.setSeed(semilla);		
+			// ram.setSeed(420);		
 		
 			int control=0;
 
